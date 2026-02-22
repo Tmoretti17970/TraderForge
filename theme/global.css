@@ -1,0 +1,310 @@
+/* ═══════════════════════════════════════════════════════════════════
+ * TradeForge OS v10 — Global Styles
+ *
+ * CSS custom properties, keyframes, reset, scrollbar, and utilities.
+ * Replaces the inline <style> tag in App.jsx for spinner keyframes
+ * and provides foundation for progressive CSS adoption.
+ * ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── CSS Custom Properties (Design Tokens) ──────────────────── */
+:root {
+  /* Colors — Forge palette */
+  --tf-bg:      #09090b;
+  --tf-bg2:     #0f1012;
+  --tf-sf:      #151619;
+  --tf-sf2:     #1a1c21;
+  --tf-bd:      #232630;
+  --tf-bd2:     #2e3240;
+  --tf-t1:      #ececef;
+  --tf-t2:      #8b8fa2;
+  --tf-t3:      #4e5266;
+  --tf-accent:  #e8642c;
+  --tf-accent-h:#d4551e;
+  --tf-green:   #2dd4a0;
+  --tf-red:     #f25c5c;
+  --tf-yellow:  #f0b64e;
+  --tf-purple:  #c084fc;
+  --tf-cyan:    #22d3ee;
+  --tf-info:    #5c9cf5;
+
+  /* Typography */
+  --tf-font:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --tf-mono:    'JetBrains Mono', 'SF Mono', monospace;
+
+  /* Spacing */
+  --tf-space-1: 4px;
+  --tf-space-2: 8px;
+  --tf-space-3: 12px;
+  --tf-space-4: 16px;
+  --tf-space-6: 24px;
+
+  /* Radii */
+  --tf-radius-sm: 4px;
+  --tf-radius-md: 8px;
+  --tf-radius-lg: 10px;
+  --tf-radius-xl: 14px;
+
+  /* Transitions */
+  --tf-transition-fast: 0.1s ease;
+  --tf-transition-base: 0.15s ease;
+  --tf-transition-slow: 0.25s ease;
+}
+
+/* ─── Reset & Base ───────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--tf-bg);
+  color: var(--tf-t1);
+  font-family: var(--tf-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--tf-bd2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--tf-t3);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--tf-bd2) transparent;
+}
+
+/* ─── Keyframes ──────────────────────────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ─── Animation Utilities ────────────────────────────────────── */
+.tf-spin       { animation: spin 0.8s linear infinite; }
+.tf-fade-in    { animation: fadeIn 0.2s ease; }
+.tf-fade-in-up { animation: fadeInUp 0.25s ease; }
+.tf-slide-in   { animation: slideInRight 0.2s ease; }
+.tf-pulse      { animation: pulse 1.5s ease infinite; }
+
+.tf-shimmer {
+  background: linear-gradient(90deg, var(--tf-sf) 25%, var(--tf-sf2) 50%, var(--tf-sf) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ─── Focus Ring ─────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--tf-accent);
+  outline-offset: 2px;
+}
+
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ─── Selection ──────────────────────────────────────────────── */
+::selection {
+  background: var(--tf-accent);
+  color: white;
+}
+
+/* ─── Mobile safe area ───────────────────────────────────────── */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .tf-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* ─── Print ──────────────────────────────────────────────────── */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  nav, .tf-no-print {
+    display: none !important;
+  }
+}
+
+/* ═══ Mobile Optimization CSS ════════════════════════════════════ */
+
+/* Viewport height fix — use calc(var(--vh, 1vh) * 100) instead of 100vh */
+:root {
+  --vh: 1vh;
+}
+
+/* Touch optimization */
+@media (pointer: coarse) {
+  /* WCAG AA: 44px minimum touch targets */
+  button, [role="button"], input, select, textarea {
+    min-height: 44px;
+  }
+
+  /* Disable hover effects on touch */
+  *:hover {
+    transition-delay: 0s;
+  }
+
+  /* Prevent zoom on double-tap */
+  * {
+    touch-action: manipulation;
+  }
+
+  /* Remove tap highlight */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Mobile (≤480px) */
+@media (max-width: 480px) {
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Scrollbar hide for horizontal scroll components */
+  .tf-hscroll::-webkit-scrollbar {
+    display: none;
+  }
+  .tf-hscroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Font adjustments */
+  body {
+    font-size: 14px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Full-width inputs */
+  input, select, textarea {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+  }
+}
+
+/* Tablet (481-768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Landscape phone */
+@media (max-height: 500px) and (orientation: landscape) {
+  /* Reduce vertical padding in landscape */
+  .tf-compact-landscape {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark mode (system preference) — already dark by default */
+@media (prefers-color-scheme: light) {
+  /* Future: light theme toggle support */
+}
+
+/* ─── Light Theme Override ──────────────────────────────────── */
+.theme-light {
+  --tf-bg:      #f8f8fa;
+  --tf-bg2:     #eef0f4;
+  --tf-sf:      #ffffff;
+  --tf-sf2:     #f2f3f6;
+  --tf-bd:      #d4d7e0;
+  --tf-bd2:     #bec3d0;
+  --tf-t1:      #111318;
+  --tf-t2:      #4a5068;
+  --tf-t3:      #8890a4;
+  --tf-accent:  #d4551e;
+  --tf-accent-h:#bf4a18;
+  --tf-green:   #12a87e;
+  --tf-red:     #dc3545;
+  --tf-yellow:  #d4930b;
+  --tf-purple:  #7c3aed;
+  --tf-cyan:    #0891b2;
+  --tf-info:    #2563eb;
+}
+
+.theme-light html,
+.theme-light body,
+html.theme-light,
+html.theme-light body,
+html.theme-light #root {
+  background: #f8f8fa;
+  color: #111318;
+}
+
+html.theme-light ::-webkit-scrollbar-thumb {
+  background: #bec3d0;
+}
+
+html.theme-light ::-webkit-scrollbar-thumb:hover {
+  background: #8890a4;
+}
+
+html.theme-light * {
+  scrollbar-color: #bec3d0 transparent;
+}
+
+html.theme-light ::selection {
+  background: #d4551e;
+  color: white;
+}
+
+/* Light theme transition */
+html {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}

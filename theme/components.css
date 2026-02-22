@@ -1,0 +1,485 @@
+/* ═══════════════════════════════════════════════════════════════════
+ * TradeForge — Component CSS
+ *
+ * Interactive states (hover, active, focus) that replace inline
+ * onMouseEnter/onMouseLeave JS patterns. Import in main.jsx.
+ *
+ * Naming: .tf-{component}  or  .tf-{pattern}
+ * ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Buttons ────────────────────────────────────────────────── */
+
+.tf-btn {
+  transition: background 0.1s ease, color 0.1s ease, transform 0.1s ease,
+              border-color 0.1s ease, box-shadow 0.15s ease;
+}
+
+.tf-btn:hover {
+  filter: brightness(1.1);
+}
+
+.tf-btn:active {
+  transform: scale(0.98);
+}
+
+/* ─── Cards ──────────────────────────────────────────────────── */
+
+.tf-card-hover {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+@media (pointer: fine) {
+  .tf-card-hover:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-color: var(--tf-bd2);
+  }
+}
+
+/* ─── Nav Buttons ────────────────────────────────────────────── */
+
+.tf-nav-btn {
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tf-nav-btn:hover {
+  background: var(--tf-bd) !important;
+}
+
+.tf-nav-btn[aria-current="page"] {
+  background: rgba(232, 100, 44, 0.1);
+}
+
+/* ─── Sidebar Icon Buttons ───────────────────────────────────── */
+
+.tf-icon-btn {
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.tf-icon-btn:hover {
+  color: var(--tf-t1);
+  background: rgba(78, 82, 102, 0.12);
+}
+
+/* ─── Toolbar Buttons ────────────────────────────────────────── */
+
+.tf-toolbar-btn {
+  transition: background 0.08s ease, color 0.08s ease, border-color 0.08s ease;
+}
+
+.tf-toolbar-btn:hover {
+  background: rgba(78, 82, 102, 0.12);
+  color: var(--tf-t1);
+}
+
+.tf-toolbar-btn[data-active="true"] {
+  background: rgba(232, 100, 44, 0.15);
+  color: var(--tf-accent);
+  border-color: rgba(232, 100, 44, 0.4);
+}
+
+/* ─── Inputs ─────────────────────────────────────────────────── */
+
+.tf-input {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tf-input:focus {
+  border-color: var(--tf-accent);
+  box-shadow: 0 0 0 3px rgba(232, 100, 44, 0.1);
+}
+
+/* ─── Links / Text Actions ───────────────────────────────────── */
+
+.tf-link {
+  color: var(--tf-accent);
+  transition: opacity 0.1s ease;
+  cursor: pointer;
+}
+
+.tf-link:hover {
+  opacity: 0.8;
+}
+
+/* ─── Clickable Rows ─────────────────────────────────────────── */
+
+.tf-row-hover {
+  transition: background 0.1s ease;
+}
+
+.tf-row-hover:hover {
+  background: rgba(78, 82, 102, 0.06);
+}
+
+/* ─── Page Transitions ───────────────────────────────────────── */
+
+.tf-page-enter {
+  animation: tfPageIn 0.15s ease;
+}
+
+@keyframes tfPageIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Modal Transitions ─────────────────────────────────────── */
+
+.tf-modal-backdrop {
+  animation: tfFadeIn 0.15s ease;
+}
+
+.tf-modal-content {
+  animation: tfModalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes tfFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes tfModalIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* ─── Slide Panel ────────────────────────────────────────────── */
+
+.tf-slide-right {
+  animation: tfSlideRight 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes tfSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ─── Active Indicator Animation ─────────────────────────────── */
+
+.tf-active-bar {
+  transition: top 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─── Number Glow (for hero stats) ───────────────────────────── */
+
+.tf-glow-positive {
+  text-shadow: 0 0 24px rgba(45, 212, 160, 0.15);
+}
+
+.tf-glow-negative {
+  text-shadow: 0 0 24px rgba(242, 92, 92, 0.15);
+}
+
+/* ─── Section Accent Border ──────────────────────────────────── */
+
+.tf-section-accent {
+  padding-left: 12px;
+  border-left: 2px solid var(--tf-accent);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+ * Sprint 5: Motion Design
+ * ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Skeleton Shimmer ──────────────────────────────────────── */
+
+.tf-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--tf-bg2, #151619);
+  border-radius: 6px;
+}
+
+.tf-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 40%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 60%,
+    transparent 100%
+  );
+  animation: tfShimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes tfShimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ─── Toast Redesign ────────────────────────────────────────── */
+
+.tf-toast-enter {
+  animation: tfToastIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tf-toast-exit {
+  animation: tfToastOut 0.2s ease forwards;
+}
+
+@keyframes tfToastIn {
+  from {
+    opacity: 0;
+    transform: translateX(48px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes tfToastOut {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(48px) scale(0.95);
+  }
+}
+
+/* Mobile: toasts enter from bottom */
+@media (max-width: 480px) {
+  @keyframes tfToastIn {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes tfToastOut {
+    from {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(24px) scale(0.95);
+    }
+  }
+}
+
+/* ─── Dropdown / Overflow Menu ──────────────────────────────── */
+
+.tf-dropdown-enter {
+  animation: tfDropdownIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top right;
+}
+
+@keyframes tfDropdownIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ─── Tooltip Fade ──────────────────────────────────────────── */
+
+.tf-tooltip {
+  animation: tfTooltipIn 0.12s ease;
+}
+
+@keyframes tfTooltipIn {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Number Count-Up Transition ─────────────────────────────
+ * Applied to stat values. Uses CSS transition on a custom
+ * property via font-variation-settings trick. In practice,
+ * the actual count-up is JS-driven (requestAnimationFrame),
+ * but these classes provide the easing and glow pulse. */
+
+.tf-stat-value {
+  transition: color 0.3s ease;
+}
+
+.tf-stat-flash {
+  animation: tfStatFlash 0.6s ease;
+}
+
+@keyframes tfStatFlash {
+  0% { opacity: 1; }
+  30% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* ─── Slide Up (for bottom sheets) ──────────────────────────── */
+
+.tf-slide-up {
+  animation: tfSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes tfSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Fade Scale (for modals, dialogs) ──────────────────────── */
+
+.tf-fade-scale {
+  animation: tfFadeScale 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes tfFadeScale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ─── Spin (for loading indicators) ──────────────────────────── */
+
+.tf-spin {
+  animation: tfSpin 0.8s linear infinite;
+}
+
+@keyframes tfSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Pulse Dot (live indicator) ────────────────────────────── */
+
+.tf-pulse-dot {
+  animation: tfPulseDot 1.5s ease-in-out infinite;
+}
+
+@keyframes tfPulseDot {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(45, 212, 160, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(45, 212, 160, 0);
+  }
+}
+
+/* ─── Stagger Animation Delay Utilities ─────────────────────── */
+
+.tf-stagger-1 { animation-delay: 0.03s; }
+.tf-stagger-2 { animation-delay: 0.06s; }
+.tf-stagger-3 { animation-delay: 0.09s; }
+.tf-stagger-4 { animation-delay: 0.12s; }
+.tf-stagger-5 { animation-delay: 0.15s; }
+
+/* ─── Focus Visible (Keyboard Navigation) ──────────────────── */
+
+.tf-btn:focus-visible,
+.tf-toolbar-btn:focus-visible,
+.tf-nav-btn:focus-visible,
+.tf-icon-btn:focus-visible,
+.tf-link:focus-visible {
+  outline: 2px solid var(--tf-accent);
+  outline-offset: 2px;
+}
+
+.tf-input:focus-visible {
+  outline: none; /* Uses box-shadow focus from .tf-input:focus */
+}
+
+/* Remove outline on mouse click */
+.tf-btn:focus:not(:focus-visible),
+.tf-toolbar-btn:focus:not(:focus-visible),
+.tf-nav-btn:focus:not(:focus-visible),
+.tf-icon-btn:focus:not(:focus-visible),
+.tf-link:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ─── Mobile Touch Target Enforcement ──────────────────────── */
+
+@media (pointer: coarse) {
+  .tf-btn,
+  .tf-toolbar-btn,
+  .tf-nav-btn,
+  .tf-icon-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ─── Screen Reader Only ────────────────────────────────────── */
+
+.tf-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ─── Reduced Motion ───────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .tf-page-enter,
+  .tf-modal-content,
+  .tf-slide-right,
+  .tf-slide-up,
+  .tf-toast-enter,
+  .tf-toast-exit,
+  .tf-dropdown-enter,
+  .tf-tooltip,
+  .tf-fade-scale,
+  .tf-stat-flash,
+  .tf-skeleton::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .tf-card-hover:hover {
+    transform: none !important;
+  }
+
+  .tf-btn:active {
+    transform: none !important;
+  }
+}

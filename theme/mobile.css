@@ -1,0 +1,336 @@
+/* ═══════════════════════════════════════════════════════════════════
+   TradeForge OS v10 — Mobile & Responsive CSS
+   
+   Breakpoints:
+     ≤480px  — phone portrait (mobile)
+     ≤768px  — tablet portrait / phone landscape
+     ≤1024px — compact desktop / tablet landscape
+     >1024px — desktop (default)
+   
+   Features:
+     - Safe area insets for notched phones
+     - Touch-optimized tap targets (44px min)
+     - Reduced motion for accessibility
+     - Print styles
+     - Landscape overrides
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Base Touch Optimizations ─────────────────────────────────── */
+@media (pointer: coarse) {
+  button, [role="button"], a, select, input[type="range"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  input, textarea, select {
+    font-size: 16px !important; /* Prevent iOS zoom on focus */
+  }
+  
+  /* Disable text selection on interactive elements */
+  .no-select {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
+
+/* ── Safe Area Insets ─────────────────────────────────────────── */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.safe-area-all {
+  padding: env(safe-area-inset-top, 0px)
+           env(safe-area-inset-right, 0px)
+           env(safe-area-inset-bottom, 0px)
+           env(safe-area-inset-left, 0px);
+}
+
+/* ── Phone Portrait (≤480px) ─────────────────────────────────── */
+@media (max-width: 480px) {
+  .desktop-only { display: none !important; }
+  .tablet-up { display: none !important; }
+  
+  /* Stack sidebar content into bottom nav */
+  .sidebar { display: none; }
+  .mobile-nav { display: flex !important; }
+  
+  /* Full-width panels */
+  .panel-container {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .panel {
+    width: 100% !important;
+    border-radius: 0;
+    border-left: none !important;
+    border-right: none !important;
+  }
+  
+  /* Compact card layout */
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+  }
+  
+  /* Reduce spacing */
+  .page-content {
+    padding: 8px !important;
+  }
+  
+  /* Chart fills available space */
+  .chart-container {
+    height: calc(100vh - 180px) !important;
+    border-radius: 0;
+  }
+  
+  /* Compact headers */
+  .page-header {
+    padding: 8px 12px !important;
+    font-size: 16px !important;
+  }
+  
+  /* Bottom sheet for modals */
+  .modal-content {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    transform: none !important;
+    border-radius: 16px 16px 0 0 !important;
+    max-height: 85vh !important;
+  }
+  
+  /* Scrollable table wrapper */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ── Tablet Portrait (481px – 768px) ─────────────────────────── */
+@media (min-width: 481px) and (max-width: 768px) {
+  .mobile-only { display: none !important; }
+  
+  /* Narrow sidebar */
+  .sidebar {
+    width: 48px !important;
+  }
+  .sidebar-label { display: none; }
+  
+  /* 2-column grid */
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  /* Split panels */
+  .panel-container {
+    flex-wrap: wrap;
+  }
+  .panel {
+    min-width: 45% !important;
+    flex: 1 1 45%;
+  }
+}
+
+/* ── Desktop (>768px) ────────────────────────────────────────── */
+@media (min-width: 769px) {
+  .mobile-only { display: none !important; }
+  .mobile-nav { display: none !important; }
+  
+  /* Full sidebar */
+  .sidebar {
+    width: 200px;
+  }
+}
+
+/* ── Wide Desktop (>1440px) ──────────────────────────────────── */
+@media (min-width: 1441px) {
+  .stat-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+  
+  .sidebar {
+    width: 240px;
+  }
+}
+
+/* ── Landscape Phone ─────────────────────────────────────────── */
+@media (max-height: 480px) and (orientation: landscape) {
+  .mobile-nav {
+    flex-direction: column !important;
+    width: 48px !important;
+    height: 100vh !important;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  .chart-container {
+    height: calc(100vh - 40px) !important;
+  }
+  
+  /* Hide non-essential chrome */
+  .page-header { display: none; }
+}
+
+/* ── Reduced Motion ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Dark Mode Adjustments ───────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  /* Already dark theme — just ensure system bar colors */
+  :root {
+    color-scheme: dark;
+  }
+  
+  meta[name="theme-color"] {
+    content: '#0d1117';
+  }
+}
+
+/* ── Print Styles ────────────────────────────────────────────── */
+@media print {
+  .sidebar, .mobile-nav, .bottom-sheet,
+  .fab, button, .no-print {
+    display: none !important;
+  }
+  
+  .page-content {
+    padding: 0 !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .chart-container {
+    break-inside: avoid;
+  }
+}
+
+/* ── Scroll Behavior ─────────────────────────────────────────── */
+.scroll-touch {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.scroll-touch::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scroll-touch::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.3);
+  border-radius: 2px;
+}
+
+/* Hide scrollbar on horizontal scroll strips */
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+.scroll-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ── Touch Feedback ──────────────────────────────────────────── */
+@media (pointer: coarse) {
+  .tap-highlight {
+    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.15);
+  }
+  
+  .tap-highlight:active {
+    opacity: 0.7;
+    transition: opacity 0.1s;
+  }
+}
+
+/* ── Viewport Units Fix (iOS Safari) ─────────────────────────── */
+.full-height {
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height */
+}
+
+.min-full-height {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ═══ Sprint 6: Mobile Pro Additions ═══════════════════════════ */
+
+/* ── Chart Fullscreen (Landscape) ──────────────────────────────── */
+@media (orientation: landscape) and (max-height: 500px) {
+  .chart-mobile-toolbar {
+    padding: 2px 8px !important;
+    min-height: 28px !important;
+  }
+  
+  .chart-mobile-toolbar button {
+    padding: 2px 6px !important;
+    font-size: 10px !important;
+    min-height: 28px !important;
+    min-width: 28px !important;
+  }
+}
+
+/* ── Drawing Sheet Scrollbar Hide ─────────────────────────────── */
+.mobile-drawing-strip::-webkit-scrollbar {
+  display: none;
+}
+.mobile-drawing-strip {
+  scrollbar-width: none;
+}
+
+/* ── Prevent Overscroll (Chart Area) ──────────────────────────── */
+@media (pointer: coarse) {
+  .chart-touch-area {
+    touch-action: none;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: auto;
+  }
+}
+
+/* ── Bottom Sheet Animation ───────────────────────────────────── */
+@keyframes mobileSheetUp {
+  from { transform: translateY(100%); opacity: 0.8; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes mobileSheetDown {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(100%); opacity: 0.8; }
+}
+
+/* ── Floating Action Button Pulse ─────────────────────────────── */
+@keyframes fabPulse {
+  0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+  50% { box-shadow: 0 2px 16px rgba(59,130,246,0.4); }
+}
+
+/* ── Mobile Chart Container ───────────────────────────────────── */
+@media (max-width: 480px) {
+  .chart-container-mobile {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+    /* Reserve space for drawing sheet peek bar */
+    padding-bottom: 36px;
+  }
+}

@@ -1,0 +1,15 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './theme/global.css';
+import './theme/components.css';
+import App from './App.jsx';
+import { registerSW } from './registerSW.js';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// Register service worker for PWA support (production only)
+registerSW();

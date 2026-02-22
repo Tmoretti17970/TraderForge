@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TradeForge</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#e8642c" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="TradeForge" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <!--ssr-head-->
+
+    <!-- Fonts referenced in constants.js (F and M) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Prevent white flash on load — matches C.bg from constants.js */
+      html, body, #root {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #09090b;
+        color: #ececef;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+
+      /* Scrollbar styling to match dark theme */
+      ::-webkit-scrollbar { width: 6px; height: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #2e3240; border-radius: 3px; }
+      ::-webkit-scrollbar-thumb:hover { background: #e8642c; }
+
+      /* Selection color */
+      ::selection { background: rgba(232, 100, 44, 0.3); }
+    </style>
+  </head>
+  <body>
+    <div id="root"><!--ssr-outlet--></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
